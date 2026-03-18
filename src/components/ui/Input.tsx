@@ -1,49 +1,50 @@
-"use client";
-
 import React, { forwardRef, InputHTMLAttributes } from "react";
+import { Check } from "lucide-react";
 import clsx from "clsx";
 
 interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   label?: string;
+  helperText?: string;
   error?: string;
-  hint?: string;
+  success?: boolean;
 }
 
 const Input = forwardRef<HTMLInputElement, InputProps>(
-  ({ label, error, hint, className, id, ...rest }, ref) => {
-    const inputId = id ?? label?.toLowerCase().replace(/\s+/g, "-");
+  ({ label, helperText, error, success, className, ...props }, ref) => {
+    const base = "block w-full px-4 py-2 border rounded-md transition-all duration-200 placeholder-[--color-text-taupe] focus:outline-none";
+
+    const borderColor = error
+      ? "border-[--color-accent-blush]"
+      : success
+      ? "border-[--color-accent-sage]"
+      : "border-[--color-text-taupe]/40";
+
+    const focusStyle = error
+      ? "focus:ring-[--color-accent-blush]/50 focus:ring-2"
+      : "focus:ring-[--color-primary]/50 focus:ring-2";
 
     return (
       <div className="flex flex-col gap-1">
         {label && (
-          <label
-            htmlFor={inputId}
-            className="text-sm font-medium"
-            style={{ color: "var(--color-text-charcoal)" }}
-          >
+          <label className="font-serif text-[--color-text-charcoal]">
             {label}
           </label>
         )}
-        <input
-          ref={ref}
-          id={inputId}
-          className={clsx(
-            "w-full px-4 py-2.5 rounded-md border text-sm outline-none transition-all duration-200",
-            "focus:ring-2",
-            error
-              ? "border-red-400 focus:ring-red-200"
-              : "border-stone-300 focus:border-[--color-primary] focus:ring-[--color-primary]/20",
-            className
+        <div className="relative">
+          <input
+            ref={ref}
+            className={clsx(base, borderColor, focusStyle, className)}
+            {...props}
+          />
+          {success && !error && (
+            <Check className="absolute right-3 top-1/2 -translate-y-1/2 w-5 h-5 text-[--color-accent-sage]" />
           )}
-          style={{ backgroundColor: "var(--color-background-ivory)" }}
-          {...rest}
-        />
-        {hint && !error && (
-          <p className="text-xs" style={{ color: "var(--color-text-taupe)" }}>
-            {hint}
-          </p>
-        )}
-        {error && <p className="text-xs text-red-500">{error}</p>}
+        </div>
+        {error ? (
+          <p className="text-[--color-accent-blush] text-sm">{error}</p>
+        ) : helperText ? (
+          <p className="text-[--color-text-taupe] text-sm">{helperText}</p>
+        ) : null}
       </div>
     );
   }
