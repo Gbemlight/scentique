@@ -4,22 +4,21 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import useEmblaCarousel from "embla-carousel-react";
 import Button from "@/components/ui/Button";
 import clsx from "clsx";
-import BestSellers from "@/app/storefront/BestSellers";
-import BrandStory from "@/app/storefront/BrandStory";
-import Testimonials from "./storefront/Testimonials";
-import NewsletterSignup from "./storefront/NewsletterSignup";
-// import BrandStory from "./storefront/BrandStory";
-
-// console.log("[import-check] BrandStory was", BrandStory);
-
+import BestSellers from "./BestSellers";
+import BrandStory from "./BrandStory";
+import Testimonials from "./Testimonials";
+// import NewsletterSignup from "@/app/storefront/NewsletterSignup";
+// (no debug logs)
+// quick runtime check
+// (debug logs removed)
 const slides = [
   {
-    image: "https://i.pinimg.com/736x/70/19/b3/7019b324d908d8652817880dc2a5efac.jpg",
+    image: "https://i.pinimg.com/736x/45/9d/2c/459d2cf50331285ef03c18f1dcce7489.jpg",
     title: "Crafted for Timeless Elegance",
     subtitle: "Discover fragrances that define presence and sophistication.",
   },
   {
-    image: "https://i.pinimg.com/736x/54/e3/c7/54e3c7710e921b35589fe1c172b0b6a3.jpg",
+    image: "https://i.pinimg.com/736x/95/13/8e/95138e0951241d6b9573fbfea0fb5bfd.jpg",
     title: "A Signature in Every Scent",
     subtitle: "Curated aromas inspired by refinement and grace.",
   },
@@ -35,7 +34,10 @@ export default function HomePage() {
   const [selectedIndex, setSelectedIndex] = useState(0);
   const autoplayRef = useRef<NodeJS.Timeout | null>(null);
 
-  const scrollTo = useCallback((index: number) => emblaApi && emblaApi.scrollTo(index), [emblaApi]);
+  const scrollTo = useCallback(
+    (index: number) => emblaApi && emblaApi.scrollTo(index),
+    [emblaApi]
+  );
 
   const onSelect = useCallback(() => {
     if (!emblaApi) return;
@@ -69,6 +71,7 @@ export default function HomePage() {
       emblaApi.off("select", onSelect);
     };
   }, [emblaApi, onSelect]);
+
   return (
     <main className="flex flex-col">
       {/* Hero Section */}
@@ -76,10 +79,18 @@ export default function HomePage() {
         <div className="h-full" ref={emblaRef}>
           <div className="flex h-full">
             {slides.map((slide, index) => (
-              <div key={index} className="relative flex-[0_0_100%] h-full">
-                <img src={slide.image} alt={slide.title} className="absolute inset-0 w-full h-full object-cover" loading="eager" referrerPolicy="no-referrer" />
+              <div
+                key={index}
+                className="relative flex-[0_0_100%] h-full"
+              >
+                <img
+                  src={slide.image}
+                  alt={slide.title}
+                  className="absolute inset-0 w-full h-full object-cover"
+                  referrerPolicy="no-referrer"
+                />
 
-                <div className="absolute inset-0 bg-linear-to-b from-black/60 via-black/40 to-black/70" />
+                <div className="absolute inset-0 bg-lineart-to-b from-black/60 via-black/40 to-black/70" />
 
                 <div className="relative z-10 h-full flex flex-col items-center justify-center text-center px-6">
                   <h1
@@ -111,13 +122,6 @@ export default function HomePage() {
                     </Button>
                   </div>
                 </div>
-                {/* {slide.title && (
-                  <img
-                    src={slide.image}
-                    alt={slide.title}
-                  //   className="hidden md:block absolute bottom-8 right-8 w-44 h-44 object-cover rounded-md shadow-lg ring-1 ring-black/10"
-                   />
-                )} */}
               </div>
             ))}
           </div>
@@ -131,18 +135,17 @@ export default function HomePage() {
               onClick={() => scrollTo(index)}
               className={clsx(
                 "w-3 h-3 rounded-full transition-all duration-300",
-                selectedIndex === index ? "bg-white scale-110" : "bg-white/40"
+                selectedIndex === index
+                  ? "bg-white scale-110"
+                  : "bg-white/40"
               )}
             />
           ))}
         </div>
       </section>
 
-      {/* Sections re-added one by one */}
+      {/* ✅ Best Sellers Section */}
       <BestSellers />
-      <BrandStory />
-      <Testimonials />
-      <NewsletterSignup />
     </main>
   );
 }
