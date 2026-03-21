@@ -8,9 +8,10 @@ export default function AboutPage() {
       {/* HERO */}
       <section className="relative h-[65vh] w-full">
         <img
-          src="https://images.unsplash.com/photo-1608571423539-e951a9b3871b"
+          src="https://i.pinimg.com/736x/43/33/09/433309f73108336580df96cb4b4019fa.jpg"
           className="absolute inset-0 w-full h-full object-cover"
           alt="Abstract fragrance bottle display"
+          referrerPolicy="no-referrer"
         />
         <div className="absolute inset-0 bg-black/40" />
         <div className="relative z-10 flex items-center justify-center h-full text-center text-white px-6">
@@ -24,7 +25,7 @@ export default function AboutPage() {
       <section className="max-w-6xl mx-auto px-6 py-24 grid md:grid-cols-2 gap-16 items-center">
         <div className="relative">
           <img
-            src="https://images.unsplash.com/photo-1615631985629-7f3f0f9d0e63"
+            src="https://images.unsplash.com/photo-1585751119414-ef2636f8aede?q=80&w=1000&auto=format&fit=crop"
             className="rounded-lg shadow-xl w-full h-auto aspect-4/5 object-cover"
             alt="Artisanal perfume creation process"
           />

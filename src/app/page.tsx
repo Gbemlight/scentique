@@ -1,6 +1,7 @@
 "use client";
 
 import { useCallback, useEffect, useRef, useState } from "react";
+import Link from "next/link";
 import useEmblaCarousel from "embla-carousel-react";
 import Button from "@/components/ui/Button";
 import clsx from "clsx";
@@ -103,12 +104,16 @@ export default function HomePage() {
                   </p>
 
                   <div className="mt-8 flex gap-4 flex-wrap justify-center">
-                    <Button variant="primary" size="lg">
-                      Shop Now
-                    </Button>
-                    <Button variant="ghost" size="lg">
-                      Explore Collections
-                    </Button>
+                    <Link href="/storefront/shop">
+                      <Button variant="primary" size="lg" className="cursor-pointer">
+                        Shop Now
+                      </Button>
+                    </Link>
+                    <Link href="/storefront/collections">
+                      <Button variant="ghost" size="lg" className="cursor-pointer">
+                        Explore Collections
+                      </Button>
+                    </Link>
                   </div>
                 </div>
                 {/* {slide.title && (

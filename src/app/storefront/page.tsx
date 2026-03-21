@@ -86,7 +86,7 @@ export default function HomePage() {
                 <img
                   src={slide.image}
                   alt={slide.title}
-                  className="absolute inset-0 w-full h-full object-cover"
+                  className="absolute inset-0 w-full h-full Sobject-cover"
                   referrerPolicy="no-referrer"
                 />
 
