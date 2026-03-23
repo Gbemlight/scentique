@@ -38,15 +38,15 @@ const Select: React.FC<SelectProps> = ({ value, onValueChange, placeholder, labe
   );
 };
 
-export const SelectItem = React.forwardRef<HTMLDivElement, any>(({ children, className, ...props }, ref) => {
+export const SelectItem = React.forwardRef<React.ElementRef<typeof Item>, React.ComponentPropsWithoutRef<typeof Item>>(({ children, className, ...props }, ref) => {
   return (
     <Item
+      ref={ref}
       className={clsx(
         "relative flex items-center px-8 py-2 text-sm text-[--color-text-charcoal] font-medium select-none group focus:bg-[--color-bg-cream] focus:text-[--color-primary] outline-none cursor-pointer rounded-sm mx-1 my-0.5",
         className
       )}
       {...props}
-      ref={ref}
     >
       <ItemText>{children}</ItemText>
       <ItemIndicator className="absolute left-2 inline-flex items-center">
